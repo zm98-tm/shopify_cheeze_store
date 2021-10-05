@@ -1,0 +1,135 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap");
+section {
+  min-height: 10vh !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  margin-bottom: 100px;
+}
+
+
+@media only screen and (max-width: 768px) {
+ .photo{
+   float: none !important;
+   justify-content: center;
+   margin-left: 0px !important;
+   margin-right: 0px !important;
+ }
+  .mybox{
+    display: block;
+    text-align: center;
+  }
+  
+ .myBox h1{
+  text-align: center;
+  }
+}
+
+  .photo{
+    float: left;
+    shape-image-threshold: 0.9;
+    shape-margin: 2%;
+    shape-outside: circle();
+    margin: 20px;
+  }
+  
+  .myBox{
+  width: 90%;
+  margin: 0 auto;
+  padding: 0 1%;
+  text-align: justify;
+  border-radius: 20px;
+  }
+  
+  .myBox p{
+  margin: 30px;
+  }
+  
+  .myBox h1{
+  margin: 30px;
+  }
+</style>
+
+{% for block in section.blocks %}
+<section>
+	
+  	<div class='myBox' style="background-color: {{block.settings.background-right}} !important" data-aos="{{block.settings.transition}}">
+      <div class='text-center'>
+      	<img src= "{{ block.settings.profile | img_url: 'master' }}" style="border-radius: 50%; width: 300px; height: 300px" class='photo'/>
+      </div>
+       <h1 style="color: {{block.settings.font-color}} !important">{{ block.settings.name }} <small class="text-muted"> - {{ block.settings.position }} </small></h1>
+        <p style="color: {{block.settings.font-color}} !important">{{ block.settings.description }}</p>
+  	</div>
+  
+  
+</section>
+{% endfor %}
+
+{% schema %}
+{
+"blocks": [
+  {
+    "name": "profile",
+	"type": "pp",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "profile",
+        "label": "profile image"
+      },
+	  {
+        "type": "color",
+        "id": "background-right",
+        "label": "background color"
+      },
+	  {
+        "type": "color",
+        "id": "font-color",
+        "label": "font color"
+      },
+	  {
+        "type": "text",
+        "id": "name",
+        "label": "profile name"
+      },
+	  {
+        "type": "text",
+        "id": "position",
+        "label": "profile position"
+      },
+	  {
+        "type": "textarea",
+        "id": "description",
+        "label": "profile description"
+      },
+	  {
+        "type": "select",
+        "id": "transition",
+        "label": "transition",
+		"options": [
+                {
+                    "value": "fade-left",
+                    "label": "fade-left"
+                },
+                {
+                    "value": "fade-right",
+                    "label": "fade-right"
+                },
+                {
+                    "value": "fade-in",
+                    "label": "fade-in"
+                },
+                {
+                    "value": "fade-out",
+                    "label": "fade-out"
+                }
+            ]
+		}
+    ]
+  }
+]
+}
+{% endschema %}
